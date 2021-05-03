@@ -25,6 +25,8 @@ Route::post('/logout', [AuthController::class, 'logout']);
 
 //forgot password
 //activate email
+Route::get("user", [AuthController::class, 'register']);
+Route::post("user/register", [AuthController::class, 'store']);
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
