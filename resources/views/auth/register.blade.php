@@ -10,8 +10,8 @@
                 <div class="card-body">
                     <p class="login-box-msg">Register a new membership</p>
 
-                    <form action="" method="POST">
-
+                    <form action="" method="post">
+                        @csrf
 
                         @if ($errors->has('name'))
                             <div class="alert alert-danger">{{$errors->first('name')}}</div> @endif
