@@ -1,11 +1,11 @@
 <?php
 
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\DashboardController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BoardController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\TaskController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,17 +36,15 @@ Route::middleware(['verified'])->group(function () {
 
     Route::middleware(['admin'])->group(function () {
         Route::get('/users', [AdminController::class, 'users'])->name('users.all');
-      //  Route::match(['get', 'post'], '/users/{id}', [AdminController::class, 'update'])->name('users.update');
-      //  Route::match(['get', 'post'], '/users/{id}', [AdminController::class, 'delete'])->name('users.delete');
-        Route::post('/users/{id}', [\App\Http\Controllers\AdminController::class, 'edit'])->name('UserEdit');
-
+        Route::post('/user/update', [AdminController::class, 'updateUser'])->name('users.update');
+        Route::post('/user-update/{id}', [AdminController::class, 'updateUserAjax'])->name('users.update-ajax');
+        Route::post('/user/delete/{id}', [AdminController::class, 'deleteUser'])->name('users.delete');
     });
-    Route::get('/boards', [BoardController::class, 'boards'])->name('boards.all');
-    Route::get('/boards/{id}', [AdminController::class, 'update'])->name('boards.update');
-    Route::delete('/boards/{id}', [AdminController::class, 'delete'])->name('boards.delete');
 
-    Route::get('/tasks', [TaskController::class, 'tasks'])->name('tasks.all');
-    Route::get('/tasks/{id}', [TaskController::class, 'update'])->name('tasks.update');
-    Route::get('/tasks/{id}', [TaskController::class, 'delete'])->name('tasks.delete');
+    Route::get('/boards', [BoardController::class, 'boards'])->name('boards.all');
+    Route::post('/board/update/{id}', [BoardController::class, 'updateBoard'])->name('boards.update');
+    Route::post('/board/delete/{id}', [BoardController::class, 'deleteBoard'])->name('boards.delete');
+    Route::post('/task/delete/{id}', [TaskController::class, 'deleteTask'])->name('tasks.delete');
+    Route::get('/board/{id}', [BoardController::class, 'board'])->name('board.view');
 
 });
