@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\User;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -18,6 +18,15 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('dashboard.index');
-    }
+       $nrusers=User::where('role',User::ROLE_USER)->count();
+       $nradmins=User::where('role',User::ROLE_ADMIN)->count();
+
+       return view(
+           'dashboard.index',
+           [
+               'nradmins'=>$nradmins,
+               'nrusers'=>$nrusers
+           ]
+       );
+   }
 }
