@@ -269,6 +269,7 @@ class BoardController extends Controller
                   Board::create([
                       'name' => $request->name,
                       'user_id' => $user->id
+
                   ]);
               }
 
@@ -276,7 +277,7 @@ class BoardController extends Controller
 
       }
 
-      public function addTask(Request $request, $id)
+      public function AddTask(Request $request, $id)
       {
           /**
            * @param Request $request
@@ -309,7 +310,7 @@ class BoardController extends Controller
                       ]);
                   }
               }
-              return redirect(route('tasks.all'));
+              return redirect(route('boards.all'));
 
       }
   }
