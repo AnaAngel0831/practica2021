@@ -1,4 +1,5 @@
-$('#userEditModal').on('shown.bs.modal', function (event) {
+//CUSTOM JS
+$('#userEditModal').on('shown.bs.modal', function(event) {
     let button = $(event.relatedTarget); // Button that triggered the modal
     let user = button.data('user');
 
@@ -9,7 +10,7 @@ $('#userEditModal').on('shown.bs.modal', function (event) {
     modal.find('#userEditRole').val(user.role);
 });
 
-$('#userEditModalAjax').on('shown.bs.modal', function (event) {
+$('#userEditModalAjax').on('shown.bs.modal', function(event) {
     let button = $(event.relatedTarget); // Button that triggered the modal
     let user = button.data('user');
 
@@ -20,7 +21,7 @@ $('#userEditModalAjax').on('shown.bs.modal', function (event) {
     modal.find('#userEditRoleAjax').val(user.role);
 });
 
-$('#userDeleteModal').on('shown.bs.modal', function (event) {
+$('#userDeleteModal').on('shown.bs.modal', function(event) {
     let button = $(event.relatedTarget); // Button that triggered the modal
     let user = button.data('user');
 
@@ -30,7 +31,7 @@ $('#userDeleteModal').on('shown.bs.modal', function (event) {
     modal.find('#userDeleteName').text(user.name);
 });
 
-$('#boardEditModal').on('shown.bs.modal', function (event) {
+$('#boardEditModal').on('shown.bs.modal', function(event) {
     let button = $(event.relatedTarget); // Button that triggered the modal
     let board = button.data('board');
 
@@ -38,9 +39,18 @@ $('#boardEditModal').on('shown.bs.modal', function (event) {
 
     modal.find('#boardEditId').val(board.id);
     modal.find('#boardEditName').val(board.name);
+
+    let usersSelected = [];
+
+    board.board_users.forEach(function(boardUser) {
+        usersSelected.push(boardUser.user_id);
+    });
+
+    modal.find('#boardEditUsers').val(usersSelected);
+    modal.find('#boardEditUsers').trigger('change');
 });
 
-$('#boardDeleteModal').on('shown.bs.modal', function (event) {
+$('#boardDeleteModal').on('shown.bs.modal', function(event) {
     let button = $(event.relatedTarget); // Button that triggered the modal
     let board = button.data('board');
 
@@ -50,18 +60,20 @@ $('#boardDeleteModal').on('shown.bs.modal', function (event) {
     modal.find('#boardDeleteName').text(board.name);
 });
 
-$('#taskEditModal').on('shown.bs.modal', function (event) {
+$('#taskEditModal').on('shown.bs.modal', function(event) {
     let button = $(event.relatedTarget); // Button that triggered the modal
     let task = button.data('task');
 
     let modal = $(this);
 
     modal.find('#taskEditId').val(task.id);
-    modal.find('#taskEditName').text(task.name);
-
+    modal.find('#taskEditName').val(task.name);
+    modal.find('#taskEditDescription').text(task.description);
+    modal.find('#taskEditAssignment').val(task.assignment ? task.assignment : '');
+    modal.find('#taskEditStatus').val(task.status);
 });
 
-$('#taskDeleteModal').on('shown.bs.modal', function (event) {
+$('#taskDeleteModal').on('shown.bs.modal', function(event) {
     let button = $(event.relatedTarget); // Button that triggered the modal
     let task = button.data('task');
 
@@ -71,11 +83,8 @@ $('#taskDeleteModal').on('shown.bs.modal', function (event) {
     modal.find('#taskDeleteName').text(task.name);
 });
 
-/**
- * Update user using ajax
- */
-$(document).ready(function () {
-    $('#userEditButtonAjax').on('click', function () {
+$(document).ready(function() {
+    $('#userEditButtonAjax').on('click', function() {
         $('#userEditAlert').addClass('hidden');
 
         let id = $('#userEditIdAjax').val();
@@ -85,7 +94,7 @@ $(document).ready(function () {
             method: 'POST',
             url: '/user-update/' + id,
             data: {role: role}
-        }).done(function (response) {
+        }).done(function(response) {
             if (response.error !== '') {
                 $('#userEditAlert').text(response.error).removeClass('hidden');
             } else {
@@ -94,14 +103,14 @@ $(document).ready(function () {
         });
     });
 
-    $('#userDeleteButton').on('click', function () {
+    $('#userDeleteButton').on('click', function() {
         $('#userDeleteAlert').addClass('hidden');
         let id = $('#userDeleteId').val();
 
         $.ajax({
             method: 'POST',
             url: '/user/delete/' + id
-        }).done(function (response) {
+        }).done(function(response) {
             if (response.error !== '') {
                 $('#userDeleteAlert').text(response.error).removeClass('hidden');
             } else {
@@ -110,24 +119,32 @@ $(document).ready(function () {
         });
     });
 
-    $('#changeBoard').on('change', function () {
+    $('#changeBoard').on('change', function() {
         let id = $(this).val();
 
         window.location.href = '/board/' + id;
     });
-    $('#boardEditButton').on('click', function () {
+
+    $('#boardEditUsers').select2();
+
+    $('#boardEditButton').on('click', function() {
         $('#boardEditAlert').addClass('hidden');
 
         let id = $('#boardEditId').val();
-        var name = $('#boardEditName').val();
+        let name = $('#boardEditName').val();
+        let boardUsersData = $('#boardEditUsers').select2('data');
 
-        document.getElementById("myInput").value = name;
+        let boardUsers = [];
+
+        boardUsersData.forEach(function(item) {
+            boardUsers.push(item.id);
+        });
 
         $.ajax({
             method: 'POST',
             url: '/board/update/' + id,
-            data: {name: name, user: user}
-        }).done(function (response) {
+            data: {name, boardUsers}
+        }).done(function(response) {
             if (response.error !== '') {
                 $('#boardEditAlert').text(response.error).removeClass('hidden');
             } else {
@@ -135,15 +152,21 @@ $(document).ready(function () {
             }
         });
     });
+    $('#boardAddModal').on('shown.bs.modal', function(event) {
+    let button = $(event.relatedTarget); // Button that triggered the modal
+    let board = button.data('board');
+    let modal = $(this);
+    modal.find('#boardAddName').text(board.name);
+});
 
-    $('#boardDeleteButton').on('click', function () {
+    $('#boardDeleteButton').on('click', function() {
         $('#boardDeleteAlert').addClass('hidden');
         let id = $('#boardDeleteId').val();
 
         $.ajax({
             method: 'POST',
             url: '/board/delete/' + id
-        }).done(function (response) {
+        }).done(function(response) {
             if (response.error !== '') {
                 $('#boardDeleteAlert').text(response.error).removeClass('hidden');
             } else {
@@ -152,17 +175,20 @@ $(document).ready(function () {
         });
     });
 
-    $('#taskEditButton').on('click', function () {
+    $('#taskEditButton').on('click', function() {
         $('#taskEditAlert').addClass('hidden');
 
         let id = $('#taskEditId').val();
         let name = $('#taskEditName').val();
+        let description = $('#taskEditDescription').text();
+        let assignment = $('#taskEditAssignment').val();
+        let status = $('#taskEditStatus').val();
 
         $.ajax({
             method: 'POST',
             url: '/task/update/' + id,
-            data: {}
-        }).done(function (response) {
+            data: {name, description, assignment, status}
+        }).done(function(response) {
             if (response.error !== '') {
                 $('#taskEditAlert').text(response.error).removeClass('hidden');
             } else {
@@ -170,15 +196,25 @@ $(document).ready(function () {
             }
         });
     });
+    $('#taskAddModal').on('shown.bs.modal', function(event) {
+    let button = $(event.relatedTarget); // Button that triggered the modal
+    let task = button.data('task');
+    let modal = $(this);
 
-    $('#taskDeleteButton').on('click', function () {
+    modal.find('#taskAddName').text(task.name);
+    modal.find('#taskAddDescription').text(task.description);
+    modal.find('#taskAddAssignment').text(task.assignment);
+    modal.find('#taskAddStatus').text(task.status);
+});
+
+    $('#taskDeleteButton').on('click', function() {
         $('#taskDeleteAlert').addClass('hidden');
         let id = $('#taskDeleteId').val();
 
         $.ajax({
             method: 'POST',
             url: '/task/delete/' + id
-        }).done(function (response) {
+        }).done(function(response) {
             if (response.error !== '') {
                 $('#taskDeleteAlert').text(response.error).removeClass('hidden');
             } else {
@@ -186,4 +222,5 @@ $(document).ready(function () {
             }
         });
     });
+
 });

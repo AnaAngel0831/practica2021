@@ -38,53 +38,53 @@
             <div class="card-body">
                 <table class="table table-bordered">
                     <thead>
-                    <tr>
-                        <th style="width: 10px">#</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Is Verified</th>
-                        <th style="width: 100px">Role</th>
-                        <th style="width: 40px">Actions</th>
-                    </tr>
+                        <tr>
+                            <th style="width: 10px">#</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Is Verified</th>
+                            <th style="width: 100px">Role</th>
+                            <th style="width: 40px">Actions</th>
+                        </tr>
                     </thead>
                     <tbody>
-                    @foreach ($users as $user)
-                        <tr>
-                            <td>{{$user->id}}</td>
-                            <td>{{$user->name}}</td>
-                            <td>{{$user->email}}</td>
-                            <td>
-                                @if ($user->email_verified_at)
-                                    <span class="badge bg-primary">Verified</span>
-                                @else
-                                    <span class="badge bg-warning">Unverified</span>
-                                @endif
-                            </td>
-                            <td>{{$user->role === \App\Models\User::ROLE_ADMIN ? 'Admin' : 'User'}}</td>
-                            <td>
-                                <div class="btn-group">
-                                    <button class="btn btn-xs btn-primary"
-                                            type="button"
-                                            data-user="{{json_encode($user)}}"
-                                            data-toggle="modal"
-                                            data-target="#userEditModal">
-                                        <i class="fas fa-edit"></i></button>
-                                    <button class="btn btn-xs btn-default"
-                                            type="button"
-                                            data-user="{{json_encode($user)}}"
-                                            data-toggle="modal"
-                                            data-target="#userEditModalAjax">
-                                        <i class="fas fa-edit"></i></button>
-                                    <button class="btn btn-xs btn-danger"
-                                            type="button"
-                                            data-user="{{json_encode($user)}}"
-                                            data-toggle="modal"
-                                            data-target="#userDeleteModal">
-                                        <i class="fas fa-trash"></i></button>
-                                </div>
-                            </td>
-                        </tr>
-                    @endforeach
+                        @foreach ($users as $user)
+                            <tr>
+                                <td>{{$user->id}}</td>
+                                <td>{{$user->name}}</td>
+                                <td>{{$user->email}}</td>
+                                <td>
+                                    @if ($user->email_verified_at)
+                                        <span class="badge bg-primary">Verified</span>
+                                    @else
+                                        <span class="badge bg-warning">Unverified</span>
+                                    @endif
+                                </td>
+                                <td>{{$user->role === \App\Models\User::ROLE_ADMIN ? 'Admin' : 'User'}}</td>
+                                <td>
+                                    <div class="btn-group">
+                                        <button class="btn btn-xs btn-primary"
+                                                type="button"
+                                                data-user="{{json_encode($user)}}"
+                                                data-toggle="modal"
+                                                data-target="#userEditModal">
+                                            <i class="fas fa-edit"></i></button>
+                                        <button class="btn btn-xs btn-default"
+                                                type="button"
+                                                data-user="{{json_encode($user)}}"
+                                                data-toggle="modal"
+                                                data-target="#userEditModalAjax">
+                                            <i class="fas fa-edit"></i></button>
+                                        <button class="btn btn-xs btn-danger"
+                                                type="button"
+                                                data-user="{{json_encode($user)}}"
+                                                data-toggle="modal"
+                                                data-target="#userDeleteModal">
+                                            <i class="fas fa-trash"></i></button>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>

@@ -51,17 +51,16 @@
                         </p>
                     </a>
                 </li>
+
+                <li class="nav-item">
+                    <a href="{{route('logout')}}" class="nav-link">
+                        <i class="nav-icon fas fa-columns"></i>
+                        <p>
+                            Logout
+                        </p>
+                    </a>
+                </li>
             </ul>
-            <ul class="nav nav-pills nav-sidebar flex-column">
-                             <!-- Add icons to the links using the .nav-icon class
-                                  with font-awesome or any other icon font library -->
-                             <li class="nav-item">
-                                 <a href="/logout" class="nav-link">
-                                     <i class="nav-icon fas fa-columns"></i>
-                                     <p>
-                                       Logout
-                                     </p>
-                                 </a>
         </nav>
         <!-- /.sidebar-menu -->
     </div>

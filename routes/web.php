@@ -4,7 +4,6 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BoardController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 | Here is where you can register web routes for your application. These
 | routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
+| contains the "web" middleware group. Now add something great!
 |
 */
 
@@ -44,7 +43,11 @@ Route::middleware(['verified'])->group(function () {
     Route::get('/boards', [BoardController::class, 'boards'])->name('boards.all');
     Route::post('/board/update/{id}', [BoardController::class, 'updateBoard'])->name('boards.update');
     Route::post('/board/delete/{id}', [BoardController::class, 'deleteBoard'])->name('boards.delete');
-    Route::post('/task/delete/{id}', [TaskController::class, 'deleteTask'])->name('tasks.delete');
+    Route::post('/board/add', [BoardController::class, 'addBoard'])->name('boards.add');
     Route::get('/board/{id}', [BoardController::class, 'board'])->name('board.view');
+
+    Route::post('/task/update/{id}', [BoardController::class, 'updateTask'])->name('tasks.update');
+    Route::post('/task/delete/{id}', [BoardController::class, 'deleteTask'])->name('tasks.delete');
+      Route::post('/task/add/{id}', [BoardController::class, 'addTask'])->name('tasks.add');
 
 });
