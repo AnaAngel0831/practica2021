@@ -66,4 +66,4 @@
     </div>
     <!-- /.sidebar -->
 </aside>
-<?php /**PATH C:\xampp\htdocs\practica2021-master\resources\views/layout/sidebar.blade.php ENDPATH**/ ?>
+<?php /**PATH C:\xampp\practica2021\resources\views/layout/sidebar.blade.php ENDPATH**/ ?>

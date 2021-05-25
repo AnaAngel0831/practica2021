@@ -60,7 +60,7 @@
                             <div class="icon">
                                 <i class="ion ion-stats-bars"></i>
                             </div>
-                            <a href="<?php echo e(route('boards.all')); ?>" class="small-box-footer">Task view<i class="fas fa-arrow-circle-right"></i></a>
+                            <a href="<?php echo e(route('boards.all')); ?>" class="small-box-footer">Click on the task you want to see <i class="fas fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
                     <!-- ./col -->
@@ -72,7 +72,9 @@
                                    <h3><?php echo e(\App\Models\Board::count()); ?></h3>
                                <?php else: ?>
                                    <h3><?php echo e($nrboards); ?></h3>
+
                                <?php endif; ?>
+
                                <p>Boards</p>
                             </div>
                             <div class="icon">
@@ -86,14 +88,14 @@
                         <!-- small box -->
                         <div class="small-box bg-danger">
                             <div class="inner">
-                                <h3>154</h3>
+                                <h3><?php echo e($nradmins); ?></h3>
 
                                 <p>Admins</p>
                             </div>
                             <div class="icon">
                                 <i class="ion ion-pie-graph"></i>
                             </div>
-                            <a href="<?php echo e(route('users.all')); ?>" class="small-box-footer"><i class="fas fa-arrow-circle-right"></i></a>
+                            <a href="<?php echo e(route('users.all')); ?>" class="small-box-footer">If you have a problem , this is our admins contacts <i class="fas fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
                     <!-- ./col -->
@@ -108,4 +110,4 @@
     <!-- /.content -->
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('layout.main', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\practica2021-master\resources\views/dashboard/index.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layout.main', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\practica2021\resources\views/dashboard/index.blade.php ENDPATH**/ ?>

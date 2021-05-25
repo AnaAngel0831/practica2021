@@ -210,4 +210,4 @@
     </section>
     <!-- /.content -->
 <?php $__env->stopSection(); ?>
-<?php echo $__env->make('layout.main', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\practica2021-master\resources\views/users/index.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layout.main', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\practica2021\resources\views/users/index.blade.php ENDPATH**/ ?>

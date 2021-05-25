@@ -57,8 +57,17 @@
                                                     data-toggle="modal"
                                                     data-target="#boardEditModal">
                                                 <i class="fas fa-edit"></i></button>
+                                                <button class="btn btn-sm bg-purple "
+                                                        type="button"
+                                                        data-board="<?php echo e(json_encode($board)); ?>"
+                                                        data-toggle="modal"
+                                                        data-target="#boardAddModal">
 
-                                          <button class="btn btn-sm btn-danger"
+                                                    <i class="fas fa-magic"></i></button>
+
+
+
+                                            <button class="btn btn-sm btn-danger"
                                                     type="button"
                                                     data-board="<?php echo e(json_encode($board)); ?>"
                                                     data-toggle="modal"
@@ -191,7 +200,7 @@
               </form>
               <div class="modal-footer justify-content-between">
                   <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                  <button type="submit"   class="btn btn-sm bg-primary "
+                  <button type="submit"   class="btn btn-sm bg-navy "
                             data-toggle="modal"
                           data-target="#boardAddModal">Add board</button>
                         </div>
@@ -201,4 +210,4 @@
     <!-- /.content -->
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('layout.main', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\practica2021-master\resources\views/boards/index.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layout.main', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\practica2021\resources\views/boards/index.blade.php ENDPATH**/ ?>

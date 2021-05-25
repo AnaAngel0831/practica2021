@@ -82,7 +82,13 @@
                                                 data-target="#taskEditModal">
                                             <i class="fas fa-edit"></i></button>
                                         <?php if($board->user->id === \Illuminate\Support\Facades\Auth::user()->id || \Illuminate\Support\Facades\Auth::user()->role === \App\Models\User::ROLE_ADMIN): ?>
-                                      
+                                        <button class="btn btn-sm bg-navy "
+                                                type="button"
+                                                data-board="<?php echo e(json_encode($task)); ?>"
+                                                data-toggle="modal"
+                                                data-target="#taskAddModal">
+                                            <i class="fas fa-cog"></i></button>
+
                                             <button class="btn btn-sm btn-danger"
                                                     type="button"
                                                     data-task="<?php echo e(json_encode($task)); ?>"
@@ -158,7 +164,7 @@
                                 <option value="">Unassigned</option>
                                 <?php $__currentLoopData = $boardUsers; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $boardUser): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <option value="<?php echo e($boardUser->user_id); ?>"><?php echo e($boardUser->user->name); ?></option>
-
+                                
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </select>
                         </div>
@@ -267,7 +273,7 @@
                       </div>
                       <div class="modal-footer justify-content-between">
                           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                          <button type="submit"   class="btn btn-sm bg-primary "
+                          <button type="submit"   class="btn btn-sm bg-navy "
                                     data-toggle="modal"
                                   data-target="#taskAddModal">Add task</button>
                       </div>
@@ -280,4 +286,4 @@
     <!-- /.content -->
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('layout.main', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\practica2021-master\resources\views/boards/view.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layout.main', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\practica2021\resources\views/boards/view.blade.php ENDPATH**/ ?>
